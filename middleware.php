@@ -6,6 +6,8 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Handler\CurlHandler;
 
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use GuzzleHttp\Psr7;
 
 function add_header($header, $value)
 {
@@ -57,12 +59,35 @@ function add_auth($profile)
 
 }
 
+function add_response_tolower_filter()
+{
+    return function (callable $handler) {
+        return function (
+            RequestInterface $request,
+            array $options
+        ) use ($handler) {
+
+            $promise = $handler($request, $options);
+
+            return $promise->then(
+                function (ResponseInterface $response) {
+                    // filter response body
+                    $body = strtolower($response->getBody()->getContents());
+                    $body = Psr7\stream_for($body);
+                    return $response->withBody($body);
+                }
+            );
+        };
+    };
+}
+
 $handler = new CurlHandler();
 $stack = HandlerStack::create($handler); // Wrap w/ middleware
-//$stack->setHandler(new CurlHandler());
 
 $stack->push(add_header('X-Foo', 'bar'));
-$stack->push(add_auth('Dave', '123456x'));
+$stack->push(add_auth('Frank.Dougal@fiends.net'));
+
+$stack->push(add_response_tolower_filter());
 
 $client = new Client(['handler' => $stack]);
 

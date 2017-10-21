@@ -95,5 +95,8 @@ $url = $argv[1];
 
 $reponse = $client->get($url);
 
+$str = Psr7\str($reponse);
 
-var_dump($reponse->getBody()->getContents());
+var_dump($str);
+
+//var_dump($reponse->getBody()->getContents());

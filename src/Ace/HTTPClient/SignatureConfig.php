@@ -1,10 +1,10 @@
 <?php namespace Ace\HTTPClient;
 
 /**
- * Class SimpleConfig
+ * Class SignatureConfig
  * @package Ace\HTTPClient
  */
-class SimpleConfig implements ConfigInterface
+class SignatureConfig implements ConfigInterface
 {
 
     /**
@@ -20,6 +20,10 @@ class SimpleConfig implements ConfigInterface
                 return 'abcde12345';
             case 'accept':
                 return 'application/json';
+            case 'region':
+                return 'eu-west-2';
+            case 'token':
+                return 'myBigFatToken';
             default:
                 return '';
         }

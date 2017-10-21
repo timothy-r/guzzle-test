@@ -1,5 +1,8 @@
 <?php namespace Ace\HTTPClient;
 
+use Psr\Http\Message\RequestInterface;
+use GuzzleHttp\Middleware;
+
 /**
  * Uses HTTP Basic Authentication and sets a configured Accept header
  */
@@ -11,12 +14,11 @@ class SimpleAPIClientBuilder extends Builder
      */
     public function addAccept()
     {
-        $this->stack->push(
-            $this->addHeader(
-                'Accept',
-                $this->config->get('accept')
-            )
-        );
+        $value = $this->config->get('accept');
+
+        $this->stack->push(Middleware::mapRequest(function (RequestInterface $request) use ($value) {
+            return $request->withHeader('Accept',  $value);
+        }));
 
         return $this;
     }
@@ -28,12 +30,9 @@ class SimpleAPIClientBuilder extends Builder
     {
         $value = $this->config->get('profile') . ':' . $this->config->get('secret');
 
-        $this->stack->push(
-            $this->addHeader(
-                'Authorization',
-                'Basic ' . base64_encode($value)
-            )
-        );
+        $this->stack->push(Middleware::mapRequest(function (RequestInterface $request) use ($value) {
+            return $request->withHeader('Authorization',  'Basic ' . base64_encode($value));
+        }));
 
         return $this;
     }

@@ -19,7 +19,7 @@ class SignatureConfig implements ConfigInterface
             case 'secret':
                 return 'abcde12345';
             case 'accept':
-                return 'application/json';
+                return 'application/vnd.cool-api.com-v1+json';
             case 'region':
                 return 'eu-west-2';
             case 'token':

@@ -26,7 +26,7 @@ class SimpleAPIClientBuilder extends Builder
      */
     public function addAuthentication()
     {
-        $value = $this->config->get('profile') . ':' . $this->config->get('password');
+        $value = $this->config->get('profile') . ':' . $this->config->get('secret');
 
         $this->stack->push(
             $this->addHeader(

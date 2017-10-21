@@ -1,44 +1,10 @@
 <?php namespace Ace\HTTPClient;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Handler\CurlHandler;
-
 /**
- * Uses HTTP Basic Authentication
+ * Uses HTTP Basic Authentication and sets a configured Accept header
  */
-class SimpleAPIClientBuilder implements ClientBuilderInterface
+class SimpleAPIClientBuilder extends Builder
 {
-    use BuilderFunctionTrait;
-
-    /**
-     * @var HandlerStack
-     */
-    private $stack;
-
-    /**
-     * @var ConfigInterface
-     */
-    private $config;
-
-    /**
-     * @param ConfigInterface $config
-     */
-    public function __construct(ConfigInterface $config)
-    {
-        $this->config = $config;
-    }
-
-    /**
-     * @return $this
-     */
-    public function begin()
-    {
-        $handler = new CurlHandler();
-        $this->stack = HandlerStack::create($handler); // Wrap w/ middleware
-
-        return $this;
-    }
 
     /**
      * @return $this
@@ -70,13 +36,5 @@ class SimpleAPIClientBuilder implements ClientBuilderInterface
         );
 
         return $this;
-    }
-
-    /**
-     * @return Client
-     */
-    public function getProduct()
-    {
-        return new Client(['handler' => $this->stack]);
     }
 }

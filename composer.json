@@ -1,0 +1,14 @@
+{
+    "name": "timrodger/guzzle",
+    "description": "Experiments with Guzzle 6",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Tim Rodger",
+            "email": "tim.rodger@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "~6.0"
+    }
+}

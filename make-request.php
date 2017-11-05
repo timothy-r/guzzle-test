@@ -3,10 +3,10 @@ require_once ('./vendor/autoload.php');
 
 use GuzzleHttp\Psr7;
 use Ace\HTTPClient\ClientDirector;
-use Ace\HTTPClient\SimpleAPIClientBuilder;
-use Ace\HTTPClient\SimpleConfig;
-use Ace\HTTPClient\SignatureAPIClientBuilder;
-use Ace\HTTPClient\SignatureConfig;
+use Ace\HTTPClient\ApiBClientBuilder;
+use Ace\HTTPClient\ApiBConfig;
+use Ace\HTTPClient\ApiAClientBuilder;
+use Ace\HTTPClient\ApiAConfig;
 
 $api = $argv[1];
 $url = $argv[2];
@@ -29,12 +29,10 @@ function getClient($api)
 {
     switch($api) {
         case 'a':
-            $config = new SignatureConfig();
-            $builder = new SignatureAPIClientBuilder($config);
+            $builder = new ApiAClientBuilder(new ApiAConfig());
             break;
         case 'b':
-            $config = new SimpleConfig();
-            $builder = new SimpleAPIClientBuilder($config);
+            $builder = new ApiBClientBuilder(new ApiBConfig());
             break;
         default:
             throw new Exception("Unknown API: $api");

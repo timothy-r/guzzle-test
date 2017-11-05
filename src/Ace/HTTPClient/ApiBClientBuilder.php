@@ -5,7 +5,7 @@ use Psr\Http\Message\RequestInterface;
 /**
  * Uses HTTP Basic Authentication and sets a configured Accept header
  */
-class SimpleAPIClientBuilder extends Builder
+class ApiBClientBuilder extends ClientBuilder
 {
     /**
      * @return $this

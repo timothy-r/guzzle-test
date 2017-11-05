@@ -7,7 +7,7 @@ use Psr\Http\Message\RequestInterface;
 /**
  * Uses HTTP Basic Authentication and sets a configured Accept header
  */
-class SignatureAPIClientBuilder extends Builder
+class ApiAClientBuilder extends ClientBuilder
 {
     /**
      * @return $this

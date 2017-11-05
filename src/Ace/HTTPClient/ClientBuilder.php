@@ -8,10 +8,10 @@ use GuzzleHttp\Middleware;
 use Psr\Http\Message\RequestInterface;
 
 /**
- * Class Builder
+ * Class ClientBuilder
  * @package Ace\HTTPClient
  */
-abstract class Builder implements ClientBuilderInterface
+abstract class ClientBuilder implements ClientBuilderInterface
 {
     /**
      * @var HandlerStack

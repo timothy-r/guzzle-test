@@ -1,10 +1,10 @@
 <?php namespace Ace\HTTPClient;
 
 /**
- * Class SimpleConfig
+ * Class ApiBConfig
  * @package Ace\HTTPClient
  */
-class SimpleConfig implements ConfigInterface
+class ApiBConfig implements ConfigInterface
 {
 
     /**

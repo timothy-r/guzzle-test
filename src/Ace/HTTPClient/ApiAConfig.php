@@ -1,10 +1,10 @@
 <?php namespace Ace\HTTPClient;
 
 /**
- * Class SignatureConfig
+ * Class ApiAConfig
  * @package Ace\HTTPClient
  */
-class SignatureConfig implements ConfigInterface
+class ApiAConfig implements ConfigInterface
 {
 
     /**

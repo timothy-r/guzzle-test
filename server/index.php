@@ -1,6 +1,6 @@
 <?php
 
-if ($_GET['retry'] == '1') {
+if (isset($_GET['retry']) && ($_GET['retry'] == '1')) {
     http_response_code(503);
 }
 

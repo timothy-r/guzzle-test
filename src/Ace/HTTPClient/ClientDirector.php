@@ -22,9 +22,6 @@ class ClientDirector
      */
     public function construct()
     {
-        $this->builder->begin();
-        $this->builder->addAccept();
-        $this->builder->addAuthentication();
-        return $this->builder;
+        return $this->builder->begin()->addAccept()->addAuthentication()->addCaching();
     }
 }

@@ -22,6 +22,8 @@ interface ClientBuilderInterface
      */
     public function addAccept();
 
+    public function addCaching();
+
     /**
      * @return \GuzzleHttp\Client
      */

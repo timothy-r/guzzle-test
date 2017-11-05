@@ -3,13 +3,21 @@
 use Aws\Credentials\Credentials;
 use Aws\Signature\SignatureProvider;
 use Psr\Http\Message\RequestInterface;
-use GuzzleHttp\Middleware;
 
 /**
  * Uses HTTP Basic Authentication and sets a configured Accept header
  */
 class SignatureAPIClientBuilder extends Builder
 {
+    /**
+     * @return $this
+     */
+    public function addAccept()
+    {
+        $value = $this->config->get('accept');
+        $this->addHeader('Accept', $value);
+        return $this;
+    }
 
     /**
      * @return $this
@@ -25,9 +33,9 @@ class SignatureAPIClientBuilder extends Builder
         $provider = SignatureProvider::defaultProvider();
         $signer = $provider('v4', 'sig-auth', $this->config->get('region'));
 
-        $this->stack->push(Middleware::mapRequest(function (RequestInterface $request) use ($credentials, $signer) {
+        $this->pushMiddleware(function (RequestInterface $request) use ($credentials, $signer) {
             return $signer->signRequest($request, $credentials);
-        }));
+        });
 
         return $this;
     }

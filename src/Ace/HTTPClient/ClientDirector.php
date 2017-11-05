@@ -1,8 +1,6 @@
 <?php namespace Ace\HTTPClient;
 
 /**
- * Class ClientDirector
- * @package Ace\HTTPClient
  */
 class ClientDirector
 {

@@ -42,18 +42,16 @@ abstract class Builder implements ClientBuilderInterface
         return $this;
     }
 
+
+
     /**
      * @return $this
      */
-    public function addAccept()
+    public function addHeader($key, $value)
     {
-        $value = $this->config->get('accept');
-
-        $this->pushMiddleware(function (RequestInterface $request) use ($value) {
-            return $request->withHeader('Accept',  $value);
+        $this->pushMiddleware(function (RequestInterface $request) use ($key, $value) {
+            return $request->withHeader($key,  $value);
         });
-
-        return $this;
     }
 
     /**
@@ -62,6 +60,14 @@ abstract class Builder implements ClientBuilderInterface
     protected function pushMiddleware(callable $middleware)
     {
         $this->stack->push(Middleware::mapRequest($middleware));
+    }
+
+    /**
+     * @return $this
+     */
+    public function addCaching()
+    {
+        return $this;
     }
 
     /**

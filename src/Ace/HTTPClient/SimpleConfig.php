@@ -18,8 +18,6 @@ class SimpleConfig implements ConfigInterface
                 return 'user-1';
             case 'secret':
                 return 'abcde12345';
-            case 'accept':
-                return 'application/json';
             default:
                 return '';
         }

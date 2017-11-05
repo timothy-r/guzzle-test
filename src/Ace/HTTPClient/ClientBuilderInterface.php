@@ -22,6 +22,11 @@ interface ClientBuilderInterface
      */
     public function addAccept();
 
+    // public function addHeader($key, $value) ??
+
+    /**
+     * @return ClientBuilderInterface
+     */
     public function addCaching();
 
     /**

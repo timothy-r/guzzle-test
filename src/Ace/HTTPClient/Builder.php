@@ -42,8 +42,6 @@ abstract class Builder implements ClientBuilderInterface
         return $this;
     }
 
-
-
     /**
      * @return $this
      */

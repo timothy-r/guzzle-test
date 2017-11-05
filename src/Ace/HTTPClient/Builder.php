@@ -3,6 +3,8 @@
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Handler\CurlHandler;
+use GuzzleHttp\Middleware;
+
 use Psr\Http\Message\RequestInterface;
 
 /**
@@ -38,6 +40,28 @@ abstract class Builder implements ClientBuilderInterface
         $this->stack = HandlerStack::create($handler); // Wrap w/ middleware
 
         return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function addAccept()
+    {
+        $value = $this->config->get('accept');
+
+        $this->pushMiddleware(function (RequestInterface $request) use ($value) {
+            return $request->withHeader('Accept',  $value);
+        });
+
+        return $this;
+    }
+
+    /**
+     * @param callable $middleware
+     */
+    protected function pushMiddleware(callable $middleware)
+    {
+        $this->stack->push(Middleware::mapRequest($middleware));
     }
 
     /**

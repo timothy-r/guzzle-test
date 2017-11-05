@@ -14,20 +14,6 @@ class SignatureAPIClientBuilder extends Builder
     /**
      * @return $this
      */
-    public function addAccept()
-    {
-        $value = $this->config->get('accept');
-
-        $this->stack->push(Middleware::mapRequest(function (RequestInterface $request) use ($value) {
-            return $request->withHeader('Accept',  $value);
-        }));
-
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
     public function addAuthentication()
     {
         $credentials = new Credentials(
